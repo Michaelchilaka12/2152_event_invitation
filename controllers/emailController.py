@@ -1,6 +1,5 @@
 from flask_mail import Message
-# from controllers.extension import mail
-from app import mail
+from controllers.extension import mail
 import threading
 
 
