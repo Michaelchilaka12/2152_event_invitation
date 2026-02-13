@@ -12,5 +12,7 @@ def send_email(to, subject, html_content, attachment_path=None):
                 content_type="image/png",
                 data=f.read()
             )
-
-    mail.send(msg)
+    try:
+        mail.send(msg)
+    except Exception as e:
+        print(f"Error sending email: {e}")
