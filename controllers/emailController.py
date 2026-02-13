@@ -11,8 +11,10 @@ def _send_async(app, msg):
             print("Async email error:", e)
 
 def send_email(to, subject, html_content, attachment_path=None, app=None):
-    msg = Message(subject, recipients=[to])
-    msg.html = html_content
+    if app:
+        with app.app_context():
+            msg = Message(subject, recipients=[to])
+            msg.html = html_content
 
     if attachment_path:
         with open(attachment_path, "rb") as f:
