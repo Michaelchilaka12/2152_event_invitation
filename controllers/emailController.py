@@ -1,5 +1,6 @@
 from flask_mail import Message
-from controllers.extension import mail
+# from controllers.extension import mail
+from app import mail
 import threading
 
 
@@ -10,7 +11,7 @@ def _send_async(app, msg):
         except Exception as e:
             print("Async email error:", e)
 
-def send_email(to, subject, html_content, attachment_path=None, app=None):
+def send_email(app, to, subject, html_content, attachment_path):
     if app:
         with app.app_context():
             msg = Message(subject, recipients=[to])
@@ -25,7 +26,8 @@ def send_email(to, subject, html_content, attachment_path=None, app=None):
             )
      # Run email in background thread (no blocking)
     if app:
-        threading.Thread(target=_send_async, args=(app, msg)).start()
+        thread = threading.Thread(target=_send_async, args=(app, msg))
+        thread.start()
     else:
         try:
             mail.send(msg)

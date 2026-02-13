@@ -38,7 +38,7 @@ def submit():
             <p><b>Secret Code:</b> AB111</p>
             """
             try:
-                send_email(email, "Event RSVP Confirmation", email_content, app=current_app)
+                send_email(current_app._get_current_object(), email, "Event RSVP Confirmation", email_content)
             except Exception as e:
                 print(f"Submit email failed: {e}")
         elif attending == "maybe":
@@ -60,7 +60,7 @@ def submit():
             
             """
             try:
-                send_email(email, "Event RSVP Confirmation", email_content, app=current_app)
+                send_email(current_app._get_current_object(), email, "Event RSVP Confirmation", email_content)
             except Exception as e:
                 print(f"Submit email failed: {e}")
         else:
@@ -83,7 +83,7 @@ def submit():
             <p>Show your QR code at the entrance.</p>
             """
             try:
-                send_email(email, "Event RSVP Confirmation", email_content, qr_path, app=current_app)
+                send_email(current_app._get_current_object(), email, "Event RSVP Confirmation", email_content, qr_path)
             except Exception as e:
                 print(f"Submit email failed: {e}")
 
