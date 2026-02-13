@@ -8,9 +8,9 @@ def generate_qr_image_path(first_name, last_name):
     qr = qrcode.make(qr_data)
 
     folder = "static/qrcodes"
-    os.makedirs(folder, exist_ok=True)
+    os.makedirs("static/qrcodes", exist_ok=True)
 
-    file_path = f"{folder}/{first_name}_{last_name}_qr.png"
+    file_path = f"static/qrcodes/{first_name}_{last_name}_qr.png"
     qr.save(file_path)
 
     return file_path

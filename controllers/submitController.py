@@ -1,4 +1,4 @@
-from flask import request, redirect, url_for, flash
+from flask import request, redirect, url_for, flash, current_app
 from controllers.emailController import send_email
 from controllers.qrcodeController import generate_qr_image_path
 
@@ -38,7 +38,7 @@ def submit():
             <p><b>Secret Code:</b> AB111</p>
             """
             try:
-                send_email(email, "Event RSVP Confirmation", email_content)
+                send_email(email, "Event RSVP Confirmation", email_content, app=current_app.get_current_object())
             except Exception as e:
                 print(f"Submit email failed: {e}")
         elif attending == "maybe":
@@ -60,7 +60,7 @@ def submit():
             
             """
             try:
-                send_email(email, "Event RSVP Confirmation", email_content)
+                send_email(email, "Event RSVP Confirmation", email_content, app=current_app.get_current_object())
             except Exception as e:
                 print(f"Submit email failed: {e}")
         else:
@@ -83,7 +83,7 @@ def submit():
             <p>Show your QR code at the entrance.</p>
             """
             try:
-                send_email(email, "Event RSVP Confirmation", email_content, qr_path)
+                send_email(email, "Event RSVP Confirmation", email_content, qr_path, app=current_app.get_current_object())
             except Exception as e:
                 print(f"Submit email failed: {e}")
 
